@@ -12,49 +12,58 @@
     />
     <title>Edit Biodata</title>
   </head>
-  <body>
-    <div class="card">
+  <body class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card p-5" style="max-width: 1000px">
       <h1 class="text-center font-bold">Section Profile</h1>
-      <div class="flex">
-        <div id="foto" class="p-3">buat foto</div>
-        <div class="flex-col p-4">
-          <div><span id="nama">Nama Anda</span></div>
-          <div><span id="role">Role Anda</span></div>
-          <div class="flex-row py-4">
-            <button id="button-edit" type="button" class="btn btn-primary">
-              Edit
-            </button>
-            <button
-              id="button-resume"
-              type="button"
-              class="btn btn-outline-success"
-            >
-              Resume
-            </button>
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Left Column -->
+        <div class="d-flex align-items-center">
+          <div id="foto" class="p-3">
+            <img src="https://via.placeholder.com/100" alt="Foto" />
+          </div>
+          <div class="flex-col p-4">
+            <div><span id="nama" class="h4">Nama Anda</span></div>
+            <div>
+              <span id="role" class="text-muted">Front End Designer</span>
+            </div>
+            <div class="d-flex py-4">
+              <button id="button-edit" type="button" class="btn btn-primary">
+                Edit
+              </button>
+              <button
+                id="button-resume"
+                type="button"
+                class="btn btn-outline-success mx-2"
+              >
+                Resume
+              </button>
+            </div>
           </div>
         </div>
-        <div class="flex-col p-2">
-          <table class="table-auto">
+
+        <!-- Right Column (Table) -->
+        <div class="p-2" style="min-width: 300px">
+          <table class="table table-borderless">
             <tbody>
               <tr>
                 <td><b>Availability</b></td>
-                <td><span id="availability">avail</span></td>
+                <td><span id="availability">Full Time</span></td>
               </tr>
               <tr>
                 <td><b>Usia</b></td>
-                <td><span id="usia">17</span></td>
+                <td><span id="usia">21</span></td>
               </tr>
               <tr>
                 <td><b>Lokasi</b></td>
-                <td><span id="lokasi"></span></td>
+                <td><span id="lokasi">Tangerang</span></td>
               </tr>
               <tr>
                 <td><b>Pengalaman</b></td>
-                <td><span id="pengalaman"></span></td>
+                <td><span id="pengalaman">banyak</span></td>
               </tr>
               <tr>
                 <td><b>Email</b></td>
-                <td><span id="email"></span></td>
+                <td><span id="email">email@email.com</span></td>
               </tr>
             </tbody>
           </table>
