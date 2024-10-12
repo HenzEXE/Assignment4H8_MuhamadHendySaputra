@@ -10,24 +10,50 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <title>Edit Biodata</title>
+    <title>Biodata</title>
+    <style>
+      /* Sembunyikan form awalnya */
+      #form-section {
+        display: none;
+      }
+
+      /* Style untuk pratinjau gambar */
+      .img-preview {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    </style>
   </head>
   <body class="d-flex align-items-center justify-content-center min-vh-100">
-    <div class="card p-5" style="max-width: 1000px">
+    <div class="card p-5" style="max-width: 800px">
+      <!-- Bagian Profil -->
       <h1 class="text-center font-bold">Section Profile</h1>
       <div class="d-flex justify-content-between align-items-center">
-        <!-- Left Column -->
         <div class="d-flex align-items-center">
+          <!-- Area Gambar Profil -->
           <div id="foto" class="p-3">
-            <img src="https://via.placeholder.com/100" alt="Foto" />
+            <img
+              id="profile-img"
+              src="https://via.placeholder.com/100"
+              alt="Foto"
+              class="img-preview"
+            />
           </div>
           <div class="flex-col p-4">
             <div><span id="nama" class="h4">Nama Anda</span></div>
             <div>
               <span id="role" class="text-muted">Front End Designer</span>
             </div>
+            <!-- Tombol Edit dan Resume -->
             <div class="d-flex py-4">
-              <button id="button-edit" type="button" class="btn btn-primary">
+              <button
+                id="button-edit"
+                type="button"
+                class="btn btn-primary"
+                onclick="toggleForm()"
+              >
                 Edit
               </button>
               <button
@@ -40,35 +66,184 @@
             </div>
           </div>
         </div>
-
-        <!-- Right Column (Table) -->
         <div class="p-2" style="min-width: 300px">
+          <!-- Tabel Informasi Profil -->
           <table class="table table-borderless">
             <tbody>
               <tr>
                 <td><b>Availability</b></td>
-                <td><span id="availability">Full Time</span></td>
+                <td><span id="availability"></span></td>
               </tr>
               <tr>
                 <td><b>Usia</b></td>
-                <td><span id="usia">21</span></td>
+                <td><span id="usia"></span></td>
               </tr>
               <tr>
                 <td><b>Lokasi</b></td>
-                <td><span id="lokasi">Tangerang</span></td>
+                <td><span id="lokasi"></span></td>
               </tr>
               <tr>
                 <td><b>Pengalaman</b></td>
-                <td><span id="pengalaman">banyak</span></td>
+                <td><span id="pengalaman"></span></td>
               </tr>
               <tr>
                 <td><b>Email</b></td>
-                <td><span id="email">email@email.com</span></td>
+                <td><span id="email"></span></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
+      <!-- Form (Awalnya Tersembunyi) -->
+      <div id="form-section" class="mt-5">
+        <h1 class="text-center font-bold">Section Form</h1>
+        <form id="editForm">
+          <!-- Input Unggah Gambar -->
+          <div class="mb-3">
+            <label for="profileImage" class="form-label"
+              >Unggah Gambar Profil Baru</label
+            >
+            <input
+              type="file"
+              class="form-control"
+              id="profileImage"
+              accept="image/*"
+              onchange="previewImage()"
+            />
+          </div>
+          <!-- Input Nama -->
+          <div class="mb-3">
+            <label for="namaInput" class="form-label">Nama</label>
+            <input
+              type="text"
+              class="form-control"
+              id="namaInput"
+              value="Nama Anda"
+            />
+          </div>
+          <!-- Input Role -->
+          <div class="mb-3">
+            <label for="roleInput" class="form-label">Role</label>
+            <input
+              type="text"
+              class="form-control"
+              id="roleInput"
+              value="Front End Designer"
+            />
+          </div>
+          <!-- Input Availability -->
+          <div class="mb-3">
+            <label for="availabilityInput" class="form-label"
+              >Availability</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="availabilityInput"
+              value="Full Time"
+            />
+          </div>
+          <!-- Input Usia -->
+          <div class="mb-3">
+            <label for="usiaInput" class="form-label">Usia</label>
+            <input
+              type="number"
+              class="form-control"
+              id="usiaInput"
+              value="19"
+            />
+          </div>
+          <!-- Input Lokasi -->
+          <div class="mb-3">
+            <label for="lokasiInput" class="form-label">Lokasi</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lokasiInput"
+              value="Jakarta"
+            />
+          </div>
+          <!-- Input Pengalaman -->
+          <div class="mb-3">
+            <label for="pengalamanInput" class="form-label"
+              >Years Experience</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="pengalamanInput"
+              value="2"
+            />
+          </div>
+          <!-- Input Email -->
+          <div class="mb-3">
+            <label for="emailInput" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailInput"
+              value="email@gmail.com"
+            />
+          </div>
+          <!-- Tombol Submit Form -->
+          <button
+            type="button"
+            class="btn btn-success w-100"
+            onclick="submitForm()"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
+
+    <!-- JavaScript untuk menampilkan form dan menampilkan pratinjau gambar -->
+    <script>
+      // Fungsi untuk menampilkan dan menyembunyikan form
+      function toggleForm() {
+        const formSection = document.getElementById("form-section");
+        formSection.style.display =
+          formSection.style.display === "none" ||
+          formSection.style.display === ""
+            ? "block"
+            : "none";
+      }
+
+      // Fungsi untuk menampilkan pratinjau gambar yang diunggah
+      function previewImage() {
+        const file = document.getElementById("profileImage").files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            document.getElementById("profile-img").src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      // Fungsi untuk menyimpan perubahan data form ke profil
+      function submitForm() {
+        const nama = document.getElementById("namaInput").value;
+        const role = document.getElementById("roleInput").value;
+        const availability = document.getElementById("availabilityInput").value;
+        const usia = document.getElementById("usiaInput").value;
+        const lokasi = document.getElementById("lokasiInput").value;
+        const pengalaman = document.getElementById("pengalamanInput").value;
+        const email = document.getElementById("emailInput").value;
+
+        // Menampilkan data yang sudah diubah di bagian profil
+        document.getElementById("nama").textContent = nama;
+        document.getElementById("role").textContent = role;
+        document.getElementById("availability").textContent = availability;
+        document.getElementById("usia").textContent = usia;
+        document.getElementById("lokasi").textContent = lokasi;
+        document.getElementById("pengalaman").textContent = pengalaman;
+        document.getElementById("email").textContent = email;
+
+        // Sembunyikan form setelah disubmit
+        toggleForm();
+      }
+    </script>
   </body>
 </html>
