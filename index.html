@@ -10,6 +10,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <title>Biodata</title>
     <style>
       /* Sembunyikan form awalnya */
@@ -27,16 +28,18 @@
     </style>
   </head>
   <body class="d-flex align-items-center justify-content-center min-vh-100">
-    <div class="card p-5" style="max-width: 800px">
+    <div id="card-resume" class="card p-5" style="max-width: 800px">
       <!-- Bagian Profil -->
-      <h1 class="text-center font-bold">Section Profile</h1>
+      <h1 id="section-profile" class="text-center font-bold">
+        Copyright © 2024 by Henz
+      </h1>
       <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <!-- Area Gambar Profil -->
           <div id="foto" class="p-3">
             <img
               id="profile-img"
-              src="https://via.placeholder.com/100"
+              src="https://placehold.co/200"
               alt="Foto"
               class="img-preview"
             />
@@ -60,6 +63,7 @@
                 id="button-resume"
                 type="button"
                 class="btn btn-outline-success mx-2"
+                onclick="downloadResumeAsJPG()"
               >
                 Resume
               </button>
@@ -218,6 +222,32 @@
 
         // Sembunyikan form setelah disubmit
         toggleForm();
+      }
+
+      // Fungsi untuk menangkap card dan mendownloadnya sebagai JPG
+      function downloadResumeAsJPG() {
+        const card = document.getElementById("card-resume");
+        const editButton = document.getElementById("button-edit");
+        const resumeButton = document.getElementById("button-resume");
+        const sectionProfile = document.getElementById("section-profile");
+
+        // Sembunyikan tombol Edit, Resume, dan tulisan Section Profile sebelum menangkap gambar
+        editButton.style.display = "none";
+        resumeButton.style.display = "none";
+        sectionProfile.style.display = "none";
+
+        // Menggunakan html2canvas untuk menangkap elemen card
+        html2canvas(card).then((canvas) => {
+          const link = document.createElement("a");
+          link.href = canvas.toDataURL("image/jpeg");
+          link.download = "resume.jpg";
+          link.click();
+
+          // Tampilkan kembali tombol Edit, Resume, dan tulisan Section Profile
+          editButton.style.display = "block";
+          resumeButton.style.display = "block";
+          sectionProfile.style.display = "block";
+        });
       }
     </script>
   </body>
